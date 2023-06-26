@@ -1,0 +1,161 @@
+Songs {
+
+“title” : “Thriller”,
+“artist” : ”Michael Jackson”,
+“year” : “1982”,
+“genre” : “Pop”,
+“url” : “<iframe width="560" height="315" src="https://www.youtube.com/embed/sOnqjkJTMaA" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>”
+
+}
+
+{
+
+“title” : “Billie Jean”,
+“artist” : ”Michael Jackson”,
+“year” : “1982”,
+“genre” : “Pop”,
+“url” : “<iframe width="560" height="315" src="https://www.youtube.com/embed/Zi_XLOBDo_Y" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>”
+
+}
+{
+
+“title” : “I Want It That Way”,
+“artist” : ”Backstreet Boys”,
+“year” : “1999”,
+“genre” : “Pop”,
+“url” : “<iframe width="560" height="315" src="https://www.youtube.com/embed/4fndeDfaWCg" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>”
+
+}
+{
+
+“title” : “...Baby One More Time”,
+“artist” : ”Britney Spears”,
+“year” : “1999”,
+“genre” : “Pop”,
+“url” : “<iframe width="560" height="315" src="https://www.youtube.com/embed/C-u5WLJ9Yk4" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>”
+
+}
+{
+
+“title” : “Bad”,
+“artist” : ”Michael Jackson”,
+“year” : “1987”,
+“genre” : “Pop”,
+“url” : “<iframe width="560" height="315" src="https://www.youtube.com/embed/Sd4SJVsTulc" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>”
+
+}
+{
+
+“title” : “Purple Rain”,
+“artist” : ”Prince”,
+“year” : “1984”,
+“genre” : “Pop”,
+“url” : “<iframe width="560" height="315" src="https://www.youtube.com/embed/TvnYmWpD_T8" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>”
+
+}
+{
+
+“title” : “I Will Always Love You”,
+“artist” : ”Whitney Houston”,
+“year” : “1992”,
+“genre” : “Pop”,
+“url” : “<iframe width="560" height="315" src="https://www.youtube.com/embed/3JWTaaS7LdU" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>”
+
+}
+{
+
+“title” : “Call Me Maybe”,
+“artist” : ”Carly Rae Jepson”,
+“year” : “2012”,
+“genre” : “Pop”,
+“url” : “<iframe width="560" height="315" src="https://www.youtube.com/embed/fWNaR-rxAic" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>”
+
+}
+ {
+
+“title” : “Poker Face”,
+“artist” : ”Lady Gaga”,
+“year” : “2008”,
+“genre” : “genre”,
+“url” : “<iframe width="560" height="315" src="https://www.youtube.com/embed/bESGLojNYSo" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>”
+
+}
+ {
+
+“title” : “Firework”,
+“artist” : ”Katy Perry”,
+“year” : “2010”,
+“genre” : “genre”,
+“url” : “<iframe width="560" height="315" src="https://www.youtube.com/embed/QGJuMBdaqIw" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>”
+
+}
+{
+"title": "Bohemian Rhapsody"
+"artist": "Queen"
+"year": "1975"
+"genre": "Rock"
+"url": "<iframe width="560" height="315" src="https://www.youtube.com/embed/fJ9rUzIMcZQ" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>"
+},
+{
+"title": "Kashmir"
+"artist": "Led Zeppelin"
+"year": "1975"
+"genre": "Rock"
+"url": "<iframe width="560" height="315" src="https://www.youtube.com/embed/sfR_HWMzgyc" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>"
+},
+{
+"title": "Baba O'Riley"
+"artist": "The Who"
+"year": "1971"
+"genre": "Rock"
+"url": "<iframe width="560" height="315" src="https://www.youtube.com/embed/x2KRpRMSu4g" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>"
+},
+{
+"title": "Hotel California"
+"artist": "Eagles"
+"year": "1976"
+"genre": "Rock"
+"url": "<iframe width="560" height="315" src="https://www.youtube.com/embed/BciS5krYL80" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>"
+},
+{
+"title": "Welcome To The Jungle"
+"artist": "Guns N' Roses"
+"year": "1987"
+"genre": "Rock"
+"url": "<iframe width="560" height="315" src="https://www.youtube.com/embed/VZY03tEIDKA" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>"
+},
+{
+"title": "Jump"
+"artist": "Van Halen"
+"year": "1984"
+"genre": "Rock"
+"url": "<iframe width="560" height="315" src="https://www.youtube.com/embed/SwYN7mTi6HM" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>"
+},
+{
+"title": "Light My Fire"
+"artist": "The Doors"
+"year": "1967"
+"genre": "Rock"
+"url": "<iframe width="560" height="315" src="https://www.youtube.com/embed/cq8k-ZbsXDI" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>"
+},
+{
+"title": "Iris"
+"artist": "Goo Goo Dolls"
+"year": "1998"
+"genre": "Rock"
+"url": "<iframe width="560" height="315" src="https://www.youtube.com/embed/NdYWuo9OFAw" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>"
+},
+{
+"title": "Free Bird"
+"artist": "Lynyrd Skynyrd"
+"year": "1973"
+"genre": "Rock"
+"url": "<iframe width="560" height="315" src="https://www.youtube.com/embed/D0W1v0kOELA" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>"
+},
+{
+"title": "You Really Got Me"
+"artist": "The Kinks"
+"year": "1964"
+"genre": "Rock"
+"url": "<iframe width="560" height="315" src="https://www.youtube.com/embed/fTTsY-oz6Go" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>"
+}
