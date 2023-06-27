@@ -136,7 +136,7 @@ span {
     justify-content: space-between;
 }
 
-.upcoming-list:hover {
+.upcoming-list:hover , .authorization button:hover{
     transform: scale(1.05);
     transition: all 0.2s ease-in-out;
 }
@@ -215,6 +215,7 @@ h2 {
 h3 {
     color: rgb(168, 168, 168);
     padding-bottom: 0.2rem;
+
 }
 
 footer {
@@ -233,4 +234,29 @@ footer {
             #ff5722);
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
+}
+
+/* AUTHORIZATION PAGE  */
+.authorization{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    margin: 10% 30%;
+    gap: 3rem;
+}
+
+.authorization h3{
+    text-align: center;
+    line-height: 1.8rem;
+}
+
+.authorization button {
+    border-radius: 2rem;
+    padding: 1rem 2rem;
+    font-family:fontBold;
+    font-size: larger;
+    background-color: #1DB954;
+    color: black;
+    cursor: pointer;
 }
