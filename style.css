@@ -1,0 +1,209 @@
+@font-face {
+    src: url('Gotham-Bold.otf');
+    font-family: fontBold;
+}
+
+@font-face {
+    src: url('Gotham-Light.otf');
+    font-family: fontLight;
+}
+
+@font-face {
+    src: url('Gotham-XLight.otf');
+    font-family: fontThin;
+}
+
+
+* {
+    margin: 0;
+    padding: 0;
+    border: 0;
+}
+
+body {
+    font-family: fontThin;
+    color: rgb(250, 250, 250);
+    background-image: linear-gradient(rgb(18, 18, 18), black);
+    height: 100%;
+    margin: 0;
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+    
+}
+
+
+/* LOGO AND TITLE */
+header {
+    display: flex;
+    justify-content: center;
+    background-color: black;
+}
+
+.title,
+span {
+    font-family: fontBold;
+    padding: 2rem;
+    color: white;
+    background: linear-gradient(to right, #ef5350, #f48fb1, #7e57c2, #2196f3, #26c6da, #43a047, #eeff41, #f9a825, #ff5722);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    letter-spacing: 1px
+}
+
+/* ANIMATED TEXT  */
+.animate-charcter
+{
+  background: linear-gradient(to right, #ef5350, #f48fb1, #7e57c2, #2196f3, #26c6da, #43a047, #eeff41, #f9a825, #ff5722);
+    -webkit-background-clip: text;
+  background-size: auto auto;
+  background-clip: border-box;
+  background-size: 200% auto;
+  color: #fff;
+  background-clip: text;
+  text-fill-color: transparent;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  animation: textclip 5s linear infinite;
+  display: inline-block;
+}
+
+@keyframes textclip {
+  to {
+    background-position: 200% center;
+  }
+}
+
+span {
+    letter-spacing: none;
+    padding: 0;
+}
+
+/* DESCRIPTION  */
+.description {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    gap: 1rem;
+    margin: 1rem;
+    padding: 0 10rem;
+    text-align: center;
+}
+
+
+/* MUSIC LIST  */
+.main {
+    /* background-color: rgb(35 , 35, 35); */
+    display: flex;
+    justify-content: space-evenly;
+    align-items: baseline;
+    border-radius: 1em;
+    padding: 3rem 5rem;
+    gap: 1rem;
+}
+
+/* CURRENT SONG  */
+.current-song,
+.upcoming-songs {
+    background-color: rgb(35, 35, 35);
+    padding: 2rem;
+    border-radius: 0.5em;
+    width: 50%;
+}
+
+.song p,
+.upcoming-list h5 {
+    margin: 0.5rem 0;
+    color: rgb(168, 168, 168)
+}
+
+/* UPCOMING SONGS LIST  */
+.upcoming-list {
+    background-color: rgb(60, 60, 60);
+    padding: 0.8rem;
+    margin-bottom: 0.65rem;
+    border-radius: 0.5em;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.upcoming-list:hover{
+    transform: scale(1.05);
+    transition: all .2s ease-in-out
+}
+
+.upcoming-list h4 {
+    margin-bottom: 0.3rem;
+}
+
+.upcoming-songs {
+    overflow-x: hidden;
+    overflow-y: scroll;
+    width: 30%;
+    min-height: 10vh;
+    max-height: 100vh;
+    gap: 0.5rem;
+}
+
+/* ARROWS  */
+.arrows {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    padding-right: 1rem;
+    cursor: pointer;
+    flex-direction: column;
+    padding: 10px;
+}
+
+.arrow {
+    border: solid rgb(224, 221, 221);
+    border-width: 0 5px 5px 0;
+    display: inline-block;
+    padding: 5px;
+}
+
+.up {
+    transform: rotate(-135deg);
+    -webkit-transform: rotate(-135deg);
+}
+
+.down {
+    transform: rotate(45deg);
+    -webkit-transform: rotate(45deg);
+}
+
+.up:hover {
+    border: solid rgb(0, 99, 0);
+    border-width: 0 5px 5px 0;
+    display: inline-block;
+    padding: 5px;
+}
+
+.down:hover {
+    border: solid rgb(169, 0, 0);
+    border-width: 0 5px 5px 0;
+    display: inline-block;
+    padding: 5px;
+}
+
+/* FONT COLORS AND SIZES */
+h2 {
+    padding: 1rem 0;
+}
+
+h3 {
+    color: rgb(168, 168, 168);
+    padding-bottom: 0.2rem;
+}
+
+
+footer {
+    text-align: center;
+    padding: 2rem;
+    margin: 2rem;
+    background: linear-gradient(to right, #ef5350, #f48fb1, #7e57c2, #2196f3, #26c6da, #43a047, #eeff41, #f9a825, #ff5722);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+}
