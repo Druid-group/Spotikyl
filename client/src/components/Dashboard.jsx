@@ -8,44 +8,52 @@ const spotifyApi = new SpotifyWebApi({
     clientId: '7c7ec56729db4416b88c933966532ad3'
 })
 
-
 const Dashboard = ({ code }) => {
 
-    const accessToken = useAuth(code)
     const [tracks, setTracks] = useState();
-    const [playingTrack, setPlayingTrack] = useState('spotify:track:4vTXBC7QOjEbi8DcJvCNE2');
+    const [playingTrack, setPlayingTrack] = useState();
+
+
+    const accessToken = useAuth(code)
 
     useEffect(() => {
+        // console.log(accessToken)
         if (!accessToken) return
         spotifyApi.setAccessToken(accessToken)
-    }, [tracks])
+        getSongs()
+    }, [accessToken])
 
     const getSongs = () => {
-        spotifyApi.searchTracks('jump').then(res => {
-            console.log(res.body.tracks.items) 
-            setTracks(res.body.tracks.items)
-            setPlayingTrack(res.body.tracks.items[0].id)
-        } )
+        // spotifyApi.setAccessToken(accessToken)
+        spotifyApi.getMySavedTracks({
+            limit: 50,
+            offset: 0
+        }).then(res => {
+            console.log(res.body.items)
+            setTracks(res.body.items)
+            setPlayingTrack(res.body.items[0].track.id)
+        })
     }
 
 
 
-    console.log(playingTrack, '--------------------------')
+
+
+    //playlist/60f1nzRcNlccZYSqDo6Az0
+
 
     return (
         <>
-        {/* <div>Dashboard {accessToken} </div> */}
-        <button onClick={getSongs} >Do it</button>
-        {
-            tracks? tracks.map((track, i) => 
-            <div>
-                <p>{track.name}</p>
-            </div>) : <></>
-        }
-        {/* { accessToken &&
-        <SpotifyPlayer token={accessToken} uris={[playingTrack]} /> 
-        } */}
-        <iframe style={{borderRadius: '12px'}} src={`https://open.spotify.com/embed/track/${playingTrack}?utm_source=generator`} width="100%" height="352" frameBorder="0" allowfullscreen="" allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture" loading="lazy"></iframe>
+            {/* <div>Dashboard {accessToken} </div> */}
+            {/* <button onClick={getSongs} >load songs</button> */}
+            {
+                tracks ? tracks.map((song) =>
+                    <div key={song.track.id}>
+                        <p>{song.track.name}</p>
+                    </div>) : <></>
+            }
+
+            {tracks && <iframe style={{ borderRadius: '12px' }} src={`https://open.spotify.com/embed/track/${playingTrack}?utm_source=generator`} width="100%" height="352" frameBorder="0" allowFullScreen="" allow="" loading="lazy"></iframe>}
         </>
     )
 }

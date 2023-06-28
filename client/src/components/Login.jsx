@@ -13,8 +13,6 @@ const AuthPage = () => {
     const auth_url = `${authorize}?client_id=${client_id}&response_type=code&redirect_uri=${encodeURI(redirect_uri)}&show_dialog=true&scope=${scope}`
 
 
-
-
     return (
         <div>
             <h3>Click to Authorize</h3>
