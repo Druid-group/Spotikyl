@@ -1,4 +1,6 @@
 import React from 'react'
+import '../App.css'
+
 
 const AuthPage = () => {
 
@@ -14,9 +16,10 @@ const AuthPage = () => {
 
 
     return (
-        <div>
-            <h3>Click to Authorize</h3>
-            <a href={auth_url} className='' >Authorize</a>
+        <div className="authorization">
+            <h1>Welcome to <span className="animate-charcter">SpotiKyl</span></h1>
+            <h3>You need to Authorize acess to be able to vote on what's up next and create rankings on the playlist</h3>
+            <button href={auth_url} className=''>Let's Go</button>
         </div>
     )
 }

@@ -16,7 +16,6 @@ export default () => {
 
     return (
         <div>
-            <h1>Hello!</h1>
             { searchParams.get('code') ? <Dashboard code={searchParams.get('code')} /> : <Login /> }
         </div>
     )
