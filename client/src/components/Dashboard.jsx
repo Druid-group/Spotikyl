@@ -36,6 +36,16 @@ const Dashboard = ({ code }) => {
     }
 
 
+    // let element = document.getElementById('embed-iframe');
+    // let options = {
+    //     width: 200,
+    //     height: 400,
+    //     uri: 'spotify:episode:7makk4oTQel546B0PZlDM5'
+    // };
+    // let callback = (EmbedController) => { };
+    // IFrameAPI.createController(element, options, callback);
+
+
 
 
 
@@ -52,7 +62,7 @@ const Dashboard = ({ code }) => {
                         <p>{song.track.name}</p>
                     </div>) : <></>
             }
-
+            <div id='embed-iframe' ></div>
             {tracks && <iframe style={{ borderRadius: '12px' }} src={`https://open.spotify.com/embed/track/${playingTrack}?utm_source=generator`} width="100%" height="352" frameBorder="0" allowFullScreen="" allow="" loading="lazy"></iframe>}
         </>
     )
