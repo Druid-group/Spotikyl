@@ -251,7 +251,7 @@ footer {
   line-height: 1.8rem;
 }
 
-.authorization button {
+.authorization a {
   border-radius: 2rem;
   padding: 1rem 2rem;
   font-family:fontBold;
@@ -259,4 +259,5 @@ footer {
   background-color: #1DB954;
   color: black;
   cursor: pointer;
+  text-decoration: none;
 }

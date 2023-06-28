@@ -19,7 +19,7 @@ const AuthPage = () => {
         <div className="authorization">
             <h1>Welcome to <span className="animate-charcter">SpotiKyl</span></h1>
             <h3>You need to Authorize acess to be able to vote on what's up next and create rankings on the playlist</h3>
-            <button href={auth_url} className=''>Let's Go</button>
+            <a href={auth_url} className=''>Let's Go</a>
         </div>
     )
 }
