@@ -1,3 +1,4 @@
+//  TODO: This is obsolete now (will it be needed again?)
 
 const redirect_uri = 'http://localhost:3000'
 const client_id = ''
