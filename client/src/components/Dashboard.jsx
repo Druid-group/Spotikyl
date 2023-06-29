@@ -11,7 +11,7 @@ const spotifyApi = new SpotifyWebApi({
 const Dashboard = ({ code }) => {
 
     const [tracks, setTracks] = useState();
-    const [playingTrack, setPlayingTrack] = useState();
+    const [trackIds, setTrackIds] = useState();
     const [i, setI] = useState(0);
 
     const accessToken = useAuth(code)
@@ -25,24 +25,25 @@ const Dashboard = ({ code }) => {
 
     const getSongs = () => {
         spotifyApi.setAccessToken(accessToken)
-        // spotifyApi.setAccessToken(accessToken)
         spotifyApi.getMySavedTracks({
             limit: 50,
             offset: 0
         }).then(res => {
+            // Include current ordering of songs with votes.
             console.log(res.body.items)
             setTracks(res.body.items)
-            setPlayingTrack(res.body.items[0].track)
-            const uris = res.body.items.map((song) => song.track.id) 
-            uris && setPlayingTrack(uris)
-            console.log('playing tracks', playingTrack)
+            setTrackIds(res.body.items[0].track)
+            const ids = res.body.items.map((song) => song.track.id) 
+            ids && setTrackIds(ids)
+            console.log('playing tracks', trackIds)
         })
     }
 
 
+
     const nextSong = (i) => {
         setI(i = i+1)
-        console.log(i)
+        // console.log(i)
         return i
     }
 
@@ -52,7 +53,7 @@ const Dashboard = ({ code }) => {
     //     const options = {
     //         width: '100%',
     //         height: '350',
-    //         uri: playingTrack[0]
+    //         uri: trackIds[0]
     //     };
     //     const callback = (EmbedController) => {
     //         document.querySelectorAll('.episode').forEach(
@@ -83,9 +84,9 @@ const Dashboard = ({ code }) => {
         //     </div>) : <></>
         // }
         // {/* { accessToken &&
-        // <SpotifyPlayer token={accessToken} uris={[playingTrack]} /> 
+        // <SpotifyPlayer token={accessToken} ids={[trackIds]} /> 
         // } */}
-        // <iframe style={{borderRadius: '12px'}} src={`https://open.spotify.com/embed/track/${playingTrack}?utm_source=generator`} width="100%" height="352" frameBorder="0" allowfullscreen="" allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture" loading="lazy"></iframe>
+        // <iframe style={{borderRadius: '12px'}} src={`https://open.spotify.com/embed/track/${trackIds}?utm_source=generator`} width="100%" height="352" frameBorder="0" allowfullscreen="" allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture" loading="lazy"></iframe>
         // </>
 
         <div>
@@ -106,11 +107,11 @@ const Dashboard = ({ code }) => {
                     <div class="song">
                         <button onClick={() => nextSong(i)}>Next</button>
                         {/* {tracks && <div id="embed-iframe"></div>} */}
-                        {tracks && <iframe  src={`https://open.spotify.com/embed/track/${playingTrack[i]}?utm_source=generator`} width="100%" height="352" frameBorder="0" autoPlay={true} allowfullscreen="" allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture" loading="lazy"></iframe>}
+                        {tracks && <iframe  src={`https://open.spotify.com/embed/track/${trackIds[i]}?utm_source=generator`} width="100%" height="352" frameBorder="0" autoPlay={true} allowfullscreen="" allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture" loading="lazy"></iframe>}
                         {/* {tracks && <SpotifyPlayer
                             // onClick={songEnds}
                             token={accessToken}
-                            uris={[playingTrack[0]]}
+                            ids={[trackIds[0]]}
                             magnifySliderOnHover={true}
                             styles={{
                                 bgColor: '#333',
@@ -125,10 +126,10 @@ const Dashboard = ({ code }) => {
                             }}
                         />} */}
 
-                        {/* <h2>{tracks && playingTrack.name}</h2>
-            <h3>{tracks && playingTrack.artists[0].name}</h3> */}
-                        {/* <p>{tracks && playingTrack.album.release_date}</p>
-            <p>{tracks && playingTrack.name}</p> */}
+                        {/* <h2>{tracks && trackIds.name}</h2>
+            <h3>{tracks && trackIds.artists[0].name}</h3> */}
+                        {/* <p>{tracks && trackIds.album.release_date}</p>
+            <p>{tracks && trackIds.name}</p> */}
                     </div>
                 </div>
 
