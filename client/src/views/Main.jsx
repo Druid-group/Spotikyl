@@ -6,7 +6,6 @@ import Login from '../components/Login';
 import Dashboard from '../components/Dashboard';
 import { useSearchParams } from 'react-router-dom';
 
-// const code = new URLSearchParams(window.location.search).get('code')
 
 
 export default () => {
@@ -17,7 +16,6 @@ export default () => {
 
     return (
         <div>
-            <h1>Hello!</h1>
             { searchParams.get('code') ? <Dashboard code={searchParams.get('code')} /> : <Login /> }
         </div>
     )
