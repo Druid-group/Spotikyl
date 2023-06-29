@@ -14,6 +14,7 @@ import "react-toastify/dist/ReactToastify.css";
 //👇🏻 Websockets configuration
 
 import { io } from "socket.io-client";
+import ClientView from './components/ClientView';
 
 
 //http://192.168.1.22:3000/
@@ -25,14 +26,13 @@ function App() {
   return (
     <div className="App">
 
-    <BrowserRouter>
       <Routes>
         <Route path='/' element={<Main />} />
         <Route path='/' element={<Login socket={socket} />} />
         <Route path='/' element={<Main />} />
         <Route path='/dashboard' element={<Dashboard />} />
       </Routes>
-      </BrowserRouter>
+      <ClientView/>
     </div>
   );
 }

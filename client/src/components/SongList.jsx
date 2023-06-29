@@ -8,7 +8,7 @@ const socket = io.connect("http://localhost:3000");
 socket.on("update", (candidates) => {
     candidates = Object.entries(candidates);
     for (const [key, candidate] of candidates){
-        if(typeof)
+        // if(typeof)
     }
 })
 
