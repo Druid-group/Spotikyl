@@ -21,6 +21,7 @@ const Dashboard = ({ code }) => {
     }, [tracks])
 
     const getSongs = () => {
+        spotifyApi.setAccessToken(accessToken)
         spotifyApi.searchTracks('jump').then(res => {
             console.log(res.body.tracks.items) 
             setTracks(res.body.tracks.items)
