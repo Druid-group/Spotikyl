@@ -18,7 +18,7 @@ const clientId = process.env.CID
 const clientS = process.env.CS
 
 
-require("./config/mongoose.config");
+// require("./config/mongoose.config");
 
 app.use(cors())
 app.use(bodyParser.json())

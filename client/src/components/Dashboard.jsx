@@ -11,8 +11,8 @@ const spotifyApi = new SpotifyWebApi({
 const Dashboard = ({ code }) => {
 
     const [tracks, setTracks] = useState();
-    const [playingTrack, setPlayingTrack] = useState();
-
+    const [trackIds, setTrackIds] = useState();
+    const [i, setI] = useState(0);
 
     const accessToken = useAuth(code)
 
@@ -25,27 +25,46 @@ const Dashboard = ({ code }) => {
 
     const getSongs = () => {
         spotifyApi.setAccessToken(accessToken)
-        // spotifyApi.setAccessToken(accessToken)
         spotifyApi.getMySavedTracks({
             limit: 50,
             offset: 0
         }).then(res => {
+            // Include current ordering of songs with votes.
             console.log(res.body.items)
             setTracks(res.body.items)
-            setPlayingTrack(res.body.items[0].track)
-            console.log(playingTrack)
+            setTrackIds(res.body.items[0].track)
+            const ids = res.body.items.map((song) => song.track.id) 
+            ids && setTrackIds(ids)
+            console.log('playing tracks', trackIds)
         })
     }
 
 
-    // let element = document.getElementById('embed-iframe');
-    // let options = {
-    //     width: 200,
-    //     height: 400,
-    //     uri: 'spotify:episode:7makk4oTQel546B0PZlDM5'
+
+    const nextSong = (i) => {
+        setI(i = i+1)
+        // console.log(i)
+        return i
+    }
+
+
+    // window.onSpotifyIframeApiReady = (IFrameAPI) => {
+    //     const element = document.getElementById('embed-iframe');
+    //     const options = {
+    //         width: '100%',
+    //         height: '350',
+    //         uri: trackIds[0]
+    //     };
+    //     const callback = (EmbedController) => {
+    //         document.querySelectorAll('.episode').forEach(
+    //             episode => {
+    //                 episode.addEventListener('click', () => {
+    //                     EmbedController.loadUri(episode.dataset.spotifyId)
+    //                 });
+    //             })
+    //     };
+    //     IFrameAPI.createController(element, options, callback);
     // };
-    // let callback = (EmbedController) => { };
-    // IFrameAPI.createController(element, options, callback);
 
 
 
@@ -65,61 +84,81 @@ const Dashboard = ({ code }) => {
         //     </div>) : <></>
         // }
         // {/* { accessToken &&
-        // <SpotifyPlayer token={accessToken} uris={[playingTrack]} /> 
+        // <SpotifyPlayer token={accessToken} ids={[trackIds]} /> 
         // } */}
-        // <iframe style={{borderRadius: '12px'}} src={`https://open.spotify.com/embed/track/${playingTrack}?utm_source=generator`} width="100%" height="352" frameBorder="0" allowfullscreen="" allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture" loading="lazy"></iframe>
+        // <iframe style={{borderRadius: '12px'}} src={`https://open.spotify.com/embed/track/${trackIds}?utm_source=generator`} width="100%" height="352" frameBorder="0" allowfullscreen="" allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture" loading="lazy"></iframe>
         // </>
 
-<div>
-<header>
-    <h1 class="title animate-charcter">SpotiKyl</h1>
-</header>
-<div class="description">
-    <h2>Vote on the music <span class="animate-charcter">YOU</span> want to hear</h2>
-    <h3>Welcome to our music app. Vote on what's up next and create rankings on the playlist. Up and down votes will
-        help shape what plays next.</h3>
-        {/* <button onClick={getSongs} >Do it</button> */}
-</div>
-<div class="main">
-    
-    {/* <!-- LEFT SIDE  --> */}
-    <div class="current-song">
-        <h2 class="animate-charcter">Playing Now</h2>
-        <div class="song">
-            {tracks && <iframe src={`https://open.spotify.com/embed/track/${playingTrack.id}?utm_source=generator`} width="100%" height="352" frameBorder="0" allowfullscreen="" allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture" loading="lazy"></iframe>}
-            {/* <h2>{tracks && playingTrack.name}</h2>
-            <h3>{tracks && playingTrack.artists[0].name}</h3> */}
-            {/* <p>{tracks && playingTrack.album.release_date}</p>
-            <p>{tracks && playingTrack.name}</p> */}
-        </div>
-    </div>
-
-    {/* <!-- RIGHT SIDE  --> */}
-    <div class="upcoming-songs">
-        <h2>Upcoming Next</h2>
-
-        {/* <!-- PLACEHOLDERS  --> */}
-        {
-                tracks? tracks.map((song, i) => 
-        <div class="upcoming-list">
-            <div>
-                <h4>{song.track.name}</h4>
-                <h5>{song.track.artists[0].name}</h5>
+        <div>
+            <header>
+                <h1 class="title animate-charcter">SpotiKyl</h1>
+            </header>
+            <div class="description">
+                <h2>Vote on the music <span class="animate-charcter title bold ">YOU</span> want to hear</h2>
+                <h3>Welcome to our music app. Vote on what's up next and create rankings on the playlist. Up and down votes will
+                    help shape what plays next.</h3>
+                {/* <button onClick={getSongs} >Do it</button> */}
             </div>
-            <div class="arrows">
-                <p class="arrow up"></p>
-                <p class="arrow down"></p>
+            <div class="main">
+
+                {/* <!-- LEFT SIDE  --> */}
+                <div class="current-song">
+                    <h2 class="animate-charcter">Playing Now</h2>
+                    <div class="song">
+                        <button onClick={() => nextSong(i)}>Next</button>
+                        {/* {tracks && <div id="embed-iframe"></div>} */}
+                        {tracks && <iframe  src={`https://open.spotify.com/embed/track/${trackIds[i]}?utm_source=generator`} width="100%" height="352" frameBorder="0" autoPlay={true} allowfullscreen="" allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture" loading="lazy"></iframe>}
+                        {/* {tracks && <SpotifyPlayer
+                            // onClick={songEnds}
+                            token={accessToken}
+                            ids={[trackIds[0]]}
+                            magnifySliderOnHover={true}
+                            styles={{
+                                bgColor: '#333',
+                                color: '#fff',
+                                loaderColor: '#fff',
+                                sliderColor: '#1cb954',
+                                savedColor: '#fff',
+                                trackArtistColor: '#ccc',
+                                trackNameColor: '#fff',
+                                loaderSize: '1px',
+                                height: '200px'
+                            }}
+                        />} */}
+
+                        {/* <h2>{tracks && trackIds.name}</h2>
+            <h3>{tracks && trackIds.artists[0].name}</h3> */}
+                        {/* <p>{tracks && trackIds.album.release_date}</p>
+            <p>{tracks && trackIds.name}</p> */}
+                    </div>
+                </div>
+
+                {/* <!-- RIGHT SIDE  --> */}
+                <div class="upcoming-songs">
+                    <h2>Upcoming Next</h2>
+
+                    {/* <!-- PLACEHOLDERS  --> */}
+                    {
+                        tracks ? tracks.map((song, i) =>
+                            <div key={song.track.id} class="upcoming-list">
+                                <div>
+                                    <h4>{song.track.name}</h4>
+                                    <h5>{song.track.artists[0].name}</h5>
+                                </div>
+                                <div class="arrows">
+                                    <p class="arrow up"></p>
+                                    <p class="arrow down"></p>
+                                </div>
+                            </div>
+                        )
+                            : <></>
+                    }
+                </div>
             </div>
+            <footer>
+                <h6>Made with Love and just enough Hate</h6>
+            </footer>
         </div>
-        ) 
-    : <></>
-    }
-    </div>
-</div>
-<footer>
-    <h6>Made with Love and just enough Hate</h6>
-</footer>
-</div>
     )
 }
 
