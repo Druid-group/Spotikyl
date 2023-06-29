@@ -24,6 +24,7 @@ const Dashboard = ({ code }) => {
     }, [accessToken])
 
     const getSongs = () => {
+        spotifyApi.setAccessToken(accessToken)
         // spotifyApi.setAccessToken(accessToken)
         spotifyApi.getMySavedTracks({
             limit: 50,
