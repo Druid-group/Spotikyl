@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react'
 import useAuth from './useAuth'
 import SpotifyWebApi from 'spotify-web-api-node'
-import { io } from "socket.io-client";
+import io from "socket.io-client";
 //import SpotifyPlayer from 'react-spotify-web-playback'
 
 
@@ -11,7 +11,7 @@ const spotifyApi = new SpotifyWebApi({
 
 
 const Dashboard = ({ code }) => {
-    const [socket] = useState(() => io.connect("http://localhost:3000"))
+    const [socket] = useState(() => io(":8000"))
     const [tracks, setTracks] = useState();
     // const [trackIds, setTrackIds] = useState();
     const [i, setI] = useState(0);
@@ -19,91 +19,77 @@ const Dashboard = ({ code }) => {
     const accessToken = useAuth(code)
 
     useEffect(() => {
-        socket.on("update", ({songId, vote}) => {
-            updateVoteCounts(songId, vote)
-        })
+
         // console.log(accessToken)
         if (!accessToken) return
         spotifyApi.setAccessToken(accessToken)
-        getSongs()
+        getSongs().then(() => {
+            socket.on("update", ({ songId, vote }) => {
+                console.log("**********************", songId, vote)
+                updateVoteCounts(songId, vote)
+
+            })
+        })
+
         return () => socket.removeAllListeners()
     }, [accessToken])
 
-    const getSongs = () => {
+    const getSongs = async () => {
         spotifyApi.setAccessToken(accessToken)
         spotifyApi.getMySavedTracks({
             limit: 50,
             offset: 0
         }).then(res => {
             const resItems = res.body.items
-            const votedItems=resItems.map( song => ({...song, 'votes':0 }) )
+            const votedItems = resItems.map(song => ({ ...song, 'votes': 0 }))
             const sorted = sortByVotes(votedItems);
             setTracks(sorted)
         })
     }
-    
+
     // Used by the iFrame
     const getPlayListIds = () => {
-        return tracks.map( x=> x.track.id )
+        return tracks.map(x => x.track.id)
     }
 
-    // Not currently use, but might be needed
-    // const getTrackById = (idStr) => {
-    //     return tracks.filter( t => t.track.id === idStr)[0]
-    // }
 
-    const getCurrentVotesById = (idStr) => {
-        const thisTrack = tracks.filter( track => track.track.id === idStr)[0]
-        return thisTrack.votes;
-    }
-    
     const upVoteTrackById = (e) => {
         const idStr = e.target.id;
-        socket.emit("vote", {songId: idStr, vote : 1})
+        socket.emit("vote", { songId: idStr, vote: 1 })
         updateVoteCounts(idStr, +1);
     }
-    
+
     const downVoteTrackById = (e) => {
         const idStr = e.target.id;
-        socket.emit("vote", {songId: idStr, vote : -1})
+        socket.emit("vote", { songId: idStr, vote: -1 })
         updateVoteCounts(idStr, -1);
     }
 
     const updateVoteCounts = (id, change) => {
-        // This is going to change ONE track's vote count, but +/- 1
-        // Filter the tracks for all t where t.id !== id
-        // Filter / change the vote count for t where t.id === id
-        // Recombine the results
-        // const currTrack = getTrackById(id)
-        const currCount = getCurrentVotesById(id)
-        // console.log('\n---------------------------------------------------- Updating vote counts...')
-        // console.log('Pre - sorted copy, 1st & Last 5 entries = ')
-        // console.log(tracks.slice(0,5), tracks.slice(-5))
 
-        const updatedTracks = tracks?.map( t => t.track.id !== id ? t : ({...t, votes: (currCount + change)}))
-        // re-sort tracks
-        const sorted = sortByVotes(updatedTracks);
-        // console.log('Sorted Tracks: ', sorted)
-        // console.log('Post - sorted tracks, 1st & Last 5 entries = ')
-        // console.log(sorted.slice(0,5), sorted.slice(-5))
+        // When updating state that depends on previous state (when using sockets) ALWAYS use call back function
+        setTracks((currentTracks) => {
+            const currCount = currentTracks.filter(track => track.track.id === id)[0].votes
 
+            const updatedTracks = currentTracks?.map(t => t.track.id !== id ? t : ({ ...t, votes: (currCount + change) }))
 
-        setTracks(sorted)
-};
+            return sortByVotes(updatedTracks);
+        })
+    };
 
     const sortByVotes = (tracks) => {
         let copy = [...tracks]
-        copy = copy.sort( (a,b) => a.votes <= b.votes ? 1 : -1)
+        copy = copy.sort((a, b) => a.votes <= b.votes ? 1 : -1)
 
         console.log('unsorted : ', tracks)
         console.log('sorted : ', copy)
-        
+
         return copy
     }
 
 
     const nextSong = (i) => {
-        setI(i = (i+1) % tracks.length )
+        setI(i = (i + 1) % tracks.length)
         return i
     }
 
