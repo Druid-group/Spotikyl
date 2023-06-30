@@ -5,22 +5,31 @@ const cors = require('cors')
 const bodyParser = require('body-parser')
 require('dotenv').config();
 const SpotifyWebApi = require('spotify-web-api-node')
-const port = 8000
+const port = 8000;
+const http = require("http").Server(app);
+const {Server} = require('socket.io') 
 
 const redURi = process.env.URI
 const clientId = process.env.CID
 const clientS = process.env.CS
 
 
-require("./config/mongoose.config");
+// require("./config/mongoose.config");
 
 app.use(cors())
 app.use(bodyParser.json())
 app.use(express.json(), express.urlencoded({ extended: true }), cors());
+app.use(express.static("client"));
 
 // const AllMyUserRoutes = require("./routes/user.routes");
-// AllMyUserRoutes(app);
 
+
+app.get("/api", (req, res) => {
+    res.json({
+        message: "Hello world",
+    });
+
+});
 
 app.post('/login', (req, res) => {
     const code = req.body.code
@@ -64,9 +73,22 @@ app.post("/refresh", (req, res) => {
         })
 })
 
+const io = new Server({cors: {
+    origin: "http://localhost:3000"
+}})
 
+io.on("connection", (socket) => {
 
-app.listen(port, () => console.log(`Listening on port: ${port}`));
+    socket.on("vote", ({songId, vote}) => {
+        
+        socket.broadcast.emit("update", { songId, vote });
+    });
+})
+
+const server = app.listen(port, () => console.log(`Listening at http://localhost:${port}`));
+
+io.attach(server)
+
 
 
 
