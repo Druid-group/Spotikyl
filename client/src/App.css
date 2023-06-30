@@ -228,7 +228,7 @@ h3 {
 footer {
   text-align: center;
   padding: 2rem;
-  margin: 2rem;
+  /* margin: 2rem; */
   background: linear-gradient(to right,
           #ef5350,
           #f48fb1,

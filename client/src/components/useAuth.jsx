@@ -24,7 +24,7 @@ const useAuth = (code) => {
                 console.log(timeOfToken.toUTCString())
             }).catch((err) => {
                 console.log(err)
-                window.location = '/'
+                // window.location = '/'
             })
         }
     }, [code])
