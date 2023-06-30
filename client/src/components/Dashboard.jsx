@@ -1,14 +1,10 @@
 import React, { useEffect, useState } from 'react'
 import useAuth from './useAuth'
 import SpotifyWebApi from 'spotify-web-api-node'
-<<<<<<< HEAD
-import SpotifyPlayer from 'react-spotify-web-playback'
-import WebPlayback from './WebPlayback'
-=======
 import { io } from "socket.io-client";
+import WebPlayback from './WebPlayback'
 //import SpotifyPlayer from 'react-spotify-web-playback'
 
->>>>>>> af940b727276f49a3d75abdb291eb6e774ba6152
 
 const spotifyApi = new SpotifyWebApi({
     clientId: '7c7ec56729db4416b88c933966532ad3'
@@ -18,11 +14,7 @@ const spotifyApi = new SpotifyWebApi({
 const Dashboard = ({ code }) => {
     const [socket] = useState(() => io.connect("http://localhost:3000"))
     const [tracks, setTracks] = useState();
-<<<<<<< HEAD
-    const [playingTrack, setPlayingTrack] = useState();
-=======
     // const [trackIds, setTrackIds] = useState();
->>>>>>> af940b727276f49a3d75abdb291eb6e774ba6152
     const [i, setI] = useState(0);
 
     const accessToken = useAuth(code)
@@ -44,20 +36,10 @@ const Dashboard = ({ code }) => {
             limit: 50,
             offset: 0
         }).then(res => {
-<<<<<<< HEAD
-            console.log(res.body.items)
-            setTracks(res.body.items)
-            setPlayingTrack(res.body.items[0].track)
-            const uris = res.body.items.map((song) => song.track.id)
-            uris && setPlayingTrack(uris)
-            // console.log('playing tracks', playingTrack)
-
-=======
             const resItems = res.body.items
             const votedItems=resItems.map( song => ({...song, 'votes':0 }) )
             const sorted = sortByVotes(votedItems);
             setTracks(sorted)
->>>>>>> af940b727276f49a3d75abdb291eb6e774ba6152
         })
     }
     
@@ -121,16 +103,8 @@ const Dashboard = ({ code }) => {
     }
 
 
-<<<<<<< HEAD
-
-    //.contentWindow.body
-    const nextSong = (i) => {
-        setI(i = i + 1)
-        // console.log(i)
-=======
     const nextSong = (i) => {
         setI(i = (i+1) % tracks.length )
->>>>>>> af940b727276f49a3d75abdb291eb6e774ba6152
         return i
     }
 
@@ -139,46 +113,6 @@ const Dashboard = ({ code }) => {
 
 
 
-<<<<<<< HEAD
-//playlist/60f1nzRcNlccZYSqDo6Az0
-
-
-return (
-    // <>
-    // {/* <div>Dashboard {accessToken} </div> */}
-    // <button onClick={getSongs} >Do it</button>
-    // {
-    //     tracks? tracks.map((track, i) => 
-    //     <div>
-    //         <p>{track.name}</p>
-    //     </div>) : <></>
-    // }
-    // {/* { accessToken &&
-    // <SpotifyPlayer token={accessToken} uris={[playingTrack]} /> 
-    // } */}
-    // <iframe style={{borderRadius: '12px'}} src={`https://open.spotify.com/embed/track/${playingTrack}?utm_source=generator`} width="100%" height="352" frameBorder="0" allowfullscreen="" allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture" loading="lazy"></iframe>
-    // </>
-
-    <div>
-        <header>
-            <h1 class="title animate-charcter">SpotiKyl</h1>
-        </header>
-        <div class="description">
-            <h2>Vote on the music <span class="animate-charcter title bold ">YOU</span> want to hear</h2>
-            <h3>Welcome to our music app. Vote on what's up next and create rankings on the playlist. Up and down votes will
-                help shape what plays next.</h3>
-            {/* <button onClick={getSongs} >Do it</button> */}
-        </div>
-        <div class="main">
-            {/* <!-- LEFT SIDE  --> */}
-            <div class="current-song">
-                <h2 class="animate-charcter">Playing Now</h2>
-                <div class="song">
-                    {/* <button onClick={() => nextSong(i)}>Next</button> */}
-                    { tracks && <WebPlayback song={tracks[0]} token={accessToken} /> }
-                    {/* {tracks && <iframe id='myIFrame' src={`https://open.spotify.com/embed/track/${playingTrack[i]}?utm_source=generator`} width="100%" height="352" frameBorder="0" autoPlay={true} allowfullscreen=""  loading="lazy"></iframe>} */}
-                    {/* {tracks && <SpotifyPlayer
-=======
     return (
         // <>
         // {/* <div>Dashboard {accessToken} </div> */}
@@ -213,11 +147,11 @@ return (
                     <div class="song">
                         <button onClick={() => nextSong(i)}>Next</button>
                         {/* {tracks && <div id="embed-iframe"></div>} */}
-                        {tracks && <iframe title={getPlayListIds()[i]} src={`https://open.spotify.com/embed/track/${getPlayListIds()[i]}?utm_source=generator`} width="100%" height="352" frameBorder="0" autoPlay={true} allowfullscreen="" allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture" loading="lazy"></iframe>}
+                        { tracks && <WebPlayback song={tracks[0]} token={accessToken} /> }
+                        {/* {tracks && <iframe title={getPlayListIds()[i]} src={`https://open.spotify.com/embed/track/${getPlayListIds()[i]}?utm_source=generator`} width="100%" height="352" frameBorder="0" autoPlay={true} allowfullscreen="" allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture" loading="lazy"></iframe>} */}
                         {/* {tracks && <iframe  src={`https://open.spotify.com/embed/track/${playListIds[i]}?utm_source=generator`} width="100%" height="352" frameBorder="0" autoPlay={true} allowfullscreen="" allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture" loading="lazy"></iframe>} */}
                         {/* {tracks && <iframe  src={`https://open.spotify.com/embed/track/${trackIds[i]}?utm_source=generator`} width="100%" height="352" frameBorder="0" autoPlay={true} allowfullscreen="" allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture" loading="lazy"></iframe>} */}
                         {/* {tracks && <SpotifyPlayer
->>>>>>> af940b727276f49a3d75abdb291eb6e774ba6152
                             // onClick={songEnds}
                             token={accessToken}
                             uris={[playingTrack[0]]}
@@ -235,12 +169,6 @@ return (
                             }}
                         />} */}
 
-<<<<<<< HEAD
-                    {/* <h2>{tracks && playingTrack.name}</h2>
-            <h3>{tracks && playingTrack.artists[0].name}</h3> */}
-                    {/* <p>{tracks && playingTrack.album.release_date}</p>
-            <p>{tracks && playingTrack.name}</p> */}
-=======
                         {/* <h2>{tracks && trackIds.name}</h2>
             <h3>{tracks && trackIds.artists[0].name}</h3> */}
                         {/* <p>{tracks && trackIds.album.release_date}</p>
@@ -269,31 +197,7 @@ return (
                         )
                             : <></>
                     }
->>>>>>> af940b727276f49a3d75abdb291eb6e774ba6152
                 </div>
-            </div>
-
-            {/* <!-- RIGHT SIDE  --> */}
-            <div class="upcoming-songs">
-                <h2>Upcoming Next</h2>
-
-                {/* <!-- PLACEHOLDERS  --> */}
-                {
-                    tracks ? tracks.map((song, i) =>
-                        <div key={song.track.id} class="upcoming-list">
-                            <div>
-                                <h4>{song.track.name}</h4>
-                                <h5>{song.track.artists[0].name}</h5>
-                            </div>
-                            <div class="arrows">
-                                <p class="arrow up"></p>
-                                <p class="arrow down"></p>
-                            </div>
-                        </div>
-                    )
-                        : <></>
-                }
-            </div>
         </div>
         <footer>
             <h6>Made with Love and just enough Hate</h6>
