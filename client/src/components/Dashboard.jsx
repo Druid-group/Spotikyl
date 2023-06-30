@@ -13,12 +13,6 @@ const Dashboard = ({ code }) => {
     const [tracks, setTracks] = useState();
     const [trackIds, setTrackIds] = useState();
     const [i, setI] = useState(0);
-    const [playListIds, setPlayListIds] = useState();
-    const [votes, setVotes] = useState(
-        []
-        // [{trackId: '6l8GvAyoUZwWDgF1e4822w', votes: 14},  // Bohemian Rhapsody
-        //  {trackId: '0KMGxYKeUzK9wc5DZCt3HT', votes: 6 }] // If you leave me now
-);   // an array of dictionaries [{id, count}]
 
     const accessToken = useAuth(code)
 
@@ -39,54 +33,29 @@ const Dashboard = ({ code }) => {
             const votedItems=resItems.map( song => ({...song, ['votes']:0 }) )
             const sorted = sortByVotes(votedItems);
             setTracks(sorted)
-            // map over items, adding x.track.votes=0 
-            // eventually re-sort these items by vote count, if exists
-            // then store into setTracks
-            // Need to also update the state of the BE spotify playlist
-            // end
-
-            /* 
-            
-
-            // Include current ordering of songs with votes.
-            console.log(resItems)
-            setTracks(resItems)
-            // setTrackIds(res.body.items[0].track)
-            const ids = res.body.items.map((song) => song.track.id) 
-            ids && setTrackIds(ids)
-
-            // Sort ids by votes, ideally before the setTrackIds, perhaps as part of the dot chain
-            // updateVoteCounts()
-
-            const foo = sortIdsByVotes(ids)
-            setPlayListIds( foo );
-            // Here, we need to integrate the songs w/ their current votes to determine playlist order
-            console.log('playlist ids', foo)
-            console.log('playing tracks', ids)
-            */
         })
     }
+    
+    // Used by the iFrame
     const getPlayListIds = () => {
-        const foo = tracks
-        let order = tracks.map( x=> x.track.id )
-        // console.log( 'Intended track order is: ', order)
-        return order
+        return tracks.map( x=> x.track.id )
     }
+
+    // Not currently use, but might be needed
     const getTrackById = (idStr) => {
         return tracks.filter( t => t.track.id === idStr)[0]
     }
 
     const getCurrentVotesById = (idStr) => {
-        const foo = tracks;
-        console.log('id is ', idStr)
-        console.log('tracks are:', foo)
-        const thisTrack = foo.filter( track => track.track.id === idStr)[0]
+        const thisTrack = tracks.filter( track => track.track.id === idStr)[0]
         return thisTrack.votes;
     }
+    
     const upVoteTrackById = (e) => {
         const idStr = e.target.id;
         updateVoteCounts(idStr, +1);
     }
+    
     const downVoteTrackById = (e) => {
         const idStr = e.target.id;
         updateVoteCounts(idStr, -1);
@@ -97,40 +66,22 @@ const Dashboard = ({ code }) => {
         // Filter the tracks for all t where t.id !== id
         // Filter / change the vote count for t where t.id === id
         // Recombine the results
-        console.log('id is ', id)
-        const currTrack = getTrackById(id)
+        // const currTrack = getTrackById(id)
         const currCount = getCurrentVotesById(id)
-        console.log('\n---------------------------------------------------- Updating vote counts...')
-        console.log('Pre - sorted copy, 1st & Last 5 entries = ')
-        console.log(tracks.slice(0,5), tracks.slice(-5))
+        // console.log('\n---------------------------------------------------- Updating vote counts...')
+        // console.log('Pre - sorted copy, 1st & Last 5 entries = ')
+        // console.log(tracks.slice(0,5), tracks.slice(-5))
 
         const updatedTracks = tracks?.map( t => t.track.id != id ? t : ({...t, votes: (currCount + change)}))
         // re-sort tracks
         const sorted = sortByVotes(updatedTracks);
-        console.log('Sorted Tracks: ', sorted)
-        console.log('Post - sorted tracks, 1st & Last 5 entries = ')
-        console.log(sorted.slice(0,5), sorted.slice(-5))
+        // console.log('Sorted Tracks: ', sorted)
+        // console.log('Post - sorted tracks, 1st & Last 5 entries = ')
+        // console.log(sorted.slice(0,5), sorted.slice(-5))
 
 
         setTracks(sorted)
 };
-
-    // const sortIdsByVotes = (trackIds) => {
-    //     const copy = [...trackIds];
-    //     console.log('Pre - sorted copy, 1st & Last 2 entries = ')
-    //     console.log(copy.slice(0,2), copy.slice(-2))
-
-    //     let votesCopy = [...votes]
-    //     votesCopy = votesCopy.sort( (a,b) => a.count < b.count ? 1 : -1 ).map( x => x.trackId );
-    //     const unVotedTracks = trackIds.filter( id => !votesCopy.includes(id));
-    //     const alltracks = votesCopy.concat(unVotedTracks);
-
-    //     console.log('Post - sorted copy, 1st & Last 2 entries = ')
-    //     console.log(alltracks.slice(0,2), alltracks.slice(-2))
-    //     console.log('Votes are: ', votesCopy)
-
-    //     return alltracks;
-    // }
 
     const sortByVotes = (tracks) => {
         let copy = [...tracks]
@@ -168,10 +119,6 @@ const Dashboard = ({ code }) => {
     // };
 
 
-
-
-
-    //playlist/60f1nzRcNlccZYSqDo6Az0
 
 
     return (
