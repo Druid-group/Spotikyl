@@ -7,11 +7,7 @@ require('dotenv').config();
 const SpotifyWebApi = require('spotify-web-api-node')
 const port = 8000;
 const http = require("http").Server(app);
-const socketIO = require('socket.io')(http, {
-    cors: {
-        origin: "http://localhost:3000"
-    }
-});
+const {Server} = require('socket.io') 
 
 const redURi = process.env.URI
 const clientId = process.env.CID
@@ -26,21 +22,7 @@ app.use(express.json(), express.urlencoded({ extended: true }), cors());
 app.use(express.static("client"));
 
 // const AllMyUserRoutes = require("./routes/user.routes");
-// AllMyUserRoutes(app);
-const server = app.listen(port, () => console.log(`Listening at http://localhost:${port}`));
-const io = require("socket.io")(server);
 
-
-
-io.on("connection", (socket) => {
-
-
-    socket.on("vote", (index, vote) => {
-        
-        console.log(songs);
-        io.emit("update", { index, vote });
-    });
-})
 
 app.get("/api", (req, res) => {
     res.json({
@@ -91,9 +73,22 @@ app.post("/refresh", (req, res) => {
         })
 })
 
+const io = new Server({cors: {
+    origin: "http://localhost:3000"
+}})
 
+io.on("connection", (socket) => {
 
-app.listen(port, () => console.log(`Listening on port: ${port}`));
+    socket.on("vote", ({songId, vote}) => {
+        
+        socket.broadcast.emit("update", { songId, vote });
+    });
+})
+
+const server = app.listen(port, () => console.log(`Listening at http://localhost:${port}`));
+
+io.attach(server)
+
 
 
 

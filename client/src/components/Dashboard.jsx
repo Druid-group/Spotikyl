@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react'
 import useAuth from './useAuth'
 import SpotifyWebApi from 'spotify-web-api-node'
+import { io } from "socket.io-client";
 //import SpotifyPlayer from 'react-spotify-web-playback'
 
 
@@ -8,8 +9,9 @@ const spotifyApi = new SpotifyWebApi({
     clientId: '7c7ec56729db4416b88c933966532ad3'
 })
 
-const Dashboard = ({ code }) => {
 
+const Dashboard = ({ code }) => {
+    const [socket] = useState(() => io.connect("http://localhost:3000"))
     const [tracks, setTracks] = useState();
     // const [trackIds, setTrackIds] = useState();
     const [i, setI] = useState(0);
@@ -17,10 +19,14 @@ const Dashboard = ({ code }) => {
     const accessToken = useAuth(code)
 
     useEffect(() => {
+        socket.on("update", ({songId, vote}) => {
+            updateVoteCounts(songId, vote)
+        })
         // console.log(accessToken)
         if (!accessToken) return
         spotifyApi.setAccessToken(accessToken)
         getSongs()
+        return () => socket.removeAllListeners()
     }, [accessToken])
 
     const getSongs = () => {
@@ -53,11 +59,13 @@ const Dashboard = ({ code }) => {
     
     const upVoteTrackById = (e) => {
         const idStr = e.target.id;
+        socket.emit("vote", {songId: idStr, vote : 1})
         updateVoteCounts(idStr, +1);
     }
     
     const downVoteTrackById = (e) => {
         const idStr = e.target.id;
+        socket.emit("vote", {songId: idStr, vote : -1})
         updateVoteCounts(idStr, -1);
     }
 
