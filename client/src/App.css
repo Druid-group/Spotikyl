@@ -49,6 +49,7 @@ header {
           #eeff41,
           #f9a825,
           #ff5722);
+          background-clip: text;
           -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
   letter-spacing: 1px;
@@ -59,7 +60,7 @@ header {
   padding: 0;
 }
 /* ANIMATED TEXT  */
-.animate-charcter {
+.animate-character {
   background: linear-gradient(to right,
           #ef5350,
           #f48fb1,
@@ -249,6 +250,8 @@ footer {
           #eeff41,
           #f9a825,
           #ff5722);
+  clip: text;
+  background-clip: text;
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
 }
