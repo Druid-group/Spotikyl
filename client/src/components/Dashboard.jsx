@@ -25,7 +25,7 @@ const Dashboard = ({ code }) => {
         spotifyApi.setAccessToken(accessToken)
         getSongs().then(() => {
             socket.on("update", ({ songId, vote }) => {
-                console.log("**********************", songId, vote)
+                // console.log("**********************", songId, vote)
                 updateVoteCounts(songId, vote)
 
             })
@@ -78,20 +78,14 @@ const Dashboard = ({ code }) => {
     };
 
     const sortByVotes = (tracks) => {
-        let copy = [...tracks]
-        copy = copy.sort((a, b) => a.votes <= b.votes ? 1 : -1)
-
-        console.log('unsorted : ', tracks)
-        console.log('sorted : ', copy)
-
-        return copy
+        return [...tracks].sort((a, b) => a.votes <= b.votes ? 1 : -1)
     }
 
 
-    const nextSong = (i) => {
-        setI(i = (i + 1) % tracks.length)
-        return i
-    }
+    // const nextSong = (i) => {
+    //     setI(i = (i + 1) % tracks.length)
+    //     return i
+    // }
 
 
     // window.onSpotifyIframeApiReady = (IFrameAPI) => {
@@ -128,30 +122,27 @@ const Dashboard = ({ code }) => {
         // {/* { accessToken &&
         // <SpotifyPlayer token={accessToken} ids={[trackIds]} /> 
         // } */}
-        // <iframe style={{borderRadius: '12px'}} src={`https://open.spotify.com/embed/track/${trackIds}?utm_source=generator`} width="100%" height="352" frameBorder="0" allowfullscreen="" allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture" loading="lazy"></iframe>
+        // <iframe style={{borderRadius: '12px'}} src={`https://open.spotify.com/embed/track/${trackIds}?utm_source=generator`} width="100%" height="352" frameBorder="0" allowFullScreen="" allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture" loading="lazy"></iframe>
         // </>
 
         <div>
             <header>
-                <h1 class="title animate-character">SpotiKyl</h1>
+                <h1 className="title animate-character">SpotiKyl</h1>
             </header>
-            <div class="description">
-                <h2>Vote on the music <span class="animate-character title bold ">YOU</span> want to hear</h2>
+            <div className="description">
+                <h2>Vote on the music <span className="animate-character title bold ">YOU</span> want to hear</h2>
                 <h3>Welcome to our music app. Vote on what's up next and create rankings on the playlist. Up and down votes will
                     help shape what plays next.</h3>
-                {/* <button onClick={getSongs} >Do it</button> */}
             </div>
-            <div class="main">
+            <div className="main">
 
                 {/* <!-- LEFT SIDE  --> */}
-                <div class="current-song">
-                    <h2 class="animate-character">Playing Now</h2>
-                    <div class="song">
-                        <button onClick={() => nextSong(i)}>Next</button>
+                <div className="current-song">
+                    <h2 className="animate-character">Playing Now</h2>
+                    <div className="song">
                         {/* {tracks && <div id="embed-iframe"></div>} */}
-                        {tracks && <iframe title={getPlayListIds()[i]} src={`https://open.spotify.com/embed/track/${getPlayListIds()[i]}?utm_source=generator`} width="100%" height="352" frameBorder="0" autoPlay={true} allowfullscreen="" allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture" loading="lazy"></iframe>}
-                        {/* {tracks && <iframe  src={`https://open.spotify.com/embed/track/${playListIds[i]}?utm_source=generator`} width="100%" height="352" frameBorder="0" autoPlay={true} allowfullscreen="" allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture" loading="lazy"></iframe>} */}
-                        {/* {tracks && <iframe  src={`https://open.spotify.com/embed/track/${trackIds[i]}?utm_source=generator`} width="100%" height="352" frameBorder="0" autoPlay={true} allowfullscreen="" allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture" loading="lazy"></iframe>} */}
+                        {/* {tracks && <iframe title={getPlayListIds()[i]} src={`https://open.spotify.com/embed/track/${getPlayListIds()[i]}?utm_source=generator`} width="100%" height="352" frameBorder="0" autoPlay={true} allowFullScreen="" allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture" loading="lazy"></iframe>} */}
+                        {tracks && <iframe title={getPlayListIds()[i]} src={`https://open.spotify.com/embed/track/${getPlayListIds()[i]}?utm_source=generator`} width="100%" height="352" loading="lazy"></iframe>}
                         {/* {tracks && <SpotifyPlayer
                             // onClick={songEnds}
                             token={accessToken}
@@ -178,21 +169,21 @@ const Dashboard = ({ code }) => {
                 </div>
 
                 {/* <!-- RIGHT SIDE  --> */}
-                <div class="upcoming-songs">
+                <div className="upcoming-songs">
                     <h2>Upcoming Next</h2>
 
                     {/* <!-- PLACEHOLDERS  --> */}
                     {
-                        // tracks ? tracks.filter((_, index) => index > 0).map((song, i) =>
-                        tracks ? tracks.map((song, i) =>
-                            <div key={song.track.id} class="upcoming-list">
+                        tracks ? tracks.filter((_, index) => index > 0).map((song, i) =>
+                        // tracks ? tracks.map((song, i) =>
+                            <div key={song.track.id} className="upcoming-list">
                                 <div>
                                     <h4>{song.track.name}</h4>
                                     <h5>{song.track.artists[0].name}</h5>
                                 </div>
-                                <div class="arrows">
-                                    <p id={song.track.id} onClick={upVoteTrackById} class="arrow up"></p>
-                                    <p id={song.track.id} onClick={downVoteTrackById} class="arrow down"></p>
+                                <div className="arrows">
+                                    <p id={song.track.id} onClick={upVoteTrackById} className="arrow up"></p>
+                                    <p id={song.track.id} onClick={downVoteTrackById} className="arrow down"></p>
                                 </div>
                             </div>
                         )

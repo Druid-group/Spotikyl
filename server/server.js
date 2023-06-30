@@ -80,11 +80,11 @@ const io = new Server({cors: {
 io.on("connection", (socket) => {
 
     socket.on("vote", ({songId, vote}) => {
-        console.log(
-            socket.id,
-            songId,
-            vote
-        )
+        // console.log(
+        //     socket.id,
+        //     songId,
+        //     vote
+        // )
         
         socket.broadcast.emit("update", { songId, vote });
     });
