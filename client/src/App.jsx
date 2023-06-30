@@ -6,15 +6,12 @@ import {BrowserRouter, Routes, Route, Switch, Link} from "react-router-dom";
 import Login from './components/Login'
 import Dashboard from './components/Dashboard';
 import Main from './views/Main';
-import SongList from './components/SongList';
-import { ToastContainer } from "react-toastify";
 
-import "react-toastify/dist/ReactToastify.css";
 
 //👇🏻 Websockets configuration
 
 import { io } from "socket.io-client";
-import ClientView from './components/ClientView';
+
 
 
 //http://192.168.1.22:3000/
@@ -28,11 +25,8 @@ function App() {
 
       <Routes>
         <Route path='/' element={<Main />} />
-        <Route path='/' element={<Login socket={socket} />} />
-        <Route path='/' element={<Main />} />
         <Route path='/dashboard' element={<Dashboard />} />
       </Routes>
-      <ClientView/>
     </div>
   );
 }
