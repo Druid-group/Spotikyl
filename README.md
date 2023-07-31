@@ -7,7 +7,7 @@ Once on the launch page click the "Let's go" button, this takes you to Spotify's
 
 
 ## Authors
-Carlie Campbell - https://github.com/Carlie-Campbell
-Kyle Mabbott - https://github.com/k-mabbott
-Allen Nowak - https://github.com/AllenNowak
-Sabrina Sambinelli - https://github.com/ssambinelli
+*Carlie Campbell - https://github.com/Carlie-Campbell
+*Kyle Mabbott - https://github.com/k-mabbott
+*Allen Nowak - https://github.com/AllenNowak
+*Sabrina Sambinelli - https://github.com/ssambinelli
