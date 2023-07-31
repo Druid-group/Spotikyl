@@ -5,4 +5,9 @@ Our goal with this project was to add on a level of interactivity that is not cu
 Once on the launch page click the "Let's go" button, this takes you to Spotify's authorization page, click the agree button and you land on our dashboard.  The dashboard will show in the player the current song, and to the right is our current playlist.  You can utilize the up and down arrows to cast your votes.
 
 
-### Created by, Carlie Campbell, Kyle Mabbott, Allen Nowak, Sabrina Sambinelli ###
+
+## Authors
+Carlie Campbell - https://github.com/Carlie-Campbell
+Kyle Mabbott - https://github.com/k-mabbott
+Allen Nowak - https://github.com/AllenNowak
+Sabrina Sambinelli - https://github.com/ssambinelli
